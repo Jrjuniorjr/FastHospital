@@ -55,7 +55,7 @@ class ResgateStore {
     };
   };
 
-  limparPaciente = () => {
+  limparPaciente = () => { //problema 
     this.limparQuadroClinico();
     runInAction("limpando", () => {
       this.paciente = {
@@ -69,12 +69,15 @@ class ResgateStore {
         quadroClinico: this.quadroClinico,
       };
     });
-  };
+  }; 
 
-  @action setIdPaciente = () => {
+  setIdPaciente = () => {
     this.paciente = { ...this.paciente, ["id"]: uuid() };
   };
-
+  
+  setIdQuadroClinico = () => {
+    this.quadroClinico = { ...this.quadroClinico, ["id"]: uuid() };
+  };
   @action handleInputChangePaciente = (
     event: FormEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -93,6 +96,8 @@ class ResgateStore {
 
   @action enviarFormulario = async () => {
     this.submitting = true;
+    this.setIdPaciente();
+    this.setIdQuadroClinico();
     try {
       await agent.Paciente.create(this.paciente);
       runInAction("enviando formulario", () => {
