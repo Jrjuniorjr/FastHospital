@@ -1,3 +1,5 @@
+import { IQuadroClinico } from "./QuadroClinico";
+
 export interface IPaciente{
     id: string;
     nome: string;
@@ -6,4 +8,5 @@ export interface IPaciente{
     idade: string;
     tipoSanguineo: string;
     altura: string;
+    quadroClinico: IQuadroClinico;
 }

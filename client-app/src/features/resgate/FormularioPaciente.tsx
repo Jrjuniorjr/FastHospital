@@ -1,16 +1,11 @@
-import React, { useState, FormEvent } from "react";
+import React, { useState, FormEvent, useContext, useEffect } from "react";
+import { observer } from "mobx-react-lite";
 import { Form } from "semantic-ui-react";
-import { IPaciente } from "../../app/models/Paciente";
+import ResgateStore from "../../app/stores/resgateStore";
 
-interface IProps {
-  createPaciente: (paciente: IPaciente) => void;
-  handleInputChange: (event: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-  paciente: IPaciente;
-}
-
-export const PacienteForm: React.FC<IProps> = ({ createPaciente,  handleInputChange, paciente }) => {
-
-
+const FormularioPaciente = () => {
+  const resgateStore = useContext(ResgateStore);
+  const { paciente,handleInputChangePaciente } = resgateStore;
 
   return (
     <Form>
@@ -18,7 +13,7 @@ export const PacienteForm: React.FC<IProps> = ({ createPaciente,  handleInputCha
         <Form.Field>
           <label>Nome</label>
           <Form.Input
-            onChange={(e) => handleInputChange(e)}
+            onChange={(e) => handleInputChangePaciente(e)}
             name="nome"
             icon="user"
             placeholder="Nome"
@@ -28,7 +23,7 @@ export const PacienteForm: React.FC<IProps> = ({ createPaciente,  handleInputCha
         <Form.Field>
           <label>Sexo</label>
           <Form.Input
-            onChange={(e) => handleInputChange(e)}
+            onChange={(e) => handleInputChangePaciente(e)}
             name="sexo"
             placeholder="Sexo"
             value={paciente.sexo}
@@ -40,7 +35,7 @@ export const PacienteForm: React.FC<IProps> = ({ createPaciente,  handleInputCha
         <Form.Field>
           <label>Peso</label>
           <Form.Input
-            onChange={(e) => handleInputChange(e)}
+            onChange={(e) => handleInputChangePaciente(e)}
             name="peso"
             icon="weight"
             placeholder="Peso"
@@ -50,7 +45,7 @@ export const PacienteForm: React.FC<IProps> = ({ createPaciente,  handleInputCha
         <Form.Field>
           <label>Idade</label>
           <Form.Input
-            onChange={(e) => handleInputChange(e)}
+            onChange={(e) => handleInputChangePaciente(e)}
             name="idade"
             icon="age"
             placeholder="Idade"
@@ -63,7 +58,7 @@ export const PacienteForm: React.FC<IProps> = ({ createPaciente,  handleInputCha
         <Form.Field>
           <label>Tipo Sanguineo</label>
           <Form.Input
-            onChange={(e) => handleInputChange(e)}
+            onChange={(e) => handleInputChangePaciente(e)}
             name="tipoSanguineo"
             placeholder="Tipo Sanguineo"
             value={paciente.tipoSanguineo}
@@ -72,7 +67,7 @@ export const PacienteForm: React.FC<IProps> = ({ createPaciente,  handleInputCha
         <Form.Field>
           <label>Altura</label>
           <Form.Input
-            onChange={(e) => handleInputChange(e)}
+            onChange={(e) => handleInputChangePaciente(e)}
             name="altura"
             value={paciente.altura}
             placeholder="Altura"
@@ -82,3 +77,5 @@ export const PacienteForm: React.FC<IProps> = ({ createPaciente,  handleInputCha
     </Form>
   );
 };
+
+export default observer(FormularioPaciente);

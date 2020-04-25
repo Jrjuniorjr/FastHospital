@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { IPaciente } from '../models/Paciente';
+import { IPaciente } from '../modelos/Paciente';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
