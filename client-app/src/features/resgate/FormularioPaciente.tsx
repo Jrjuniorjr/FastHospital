@@ -74,16 +74,19 @@ const FormularioPaciente = () => {
           />
         </Form.Field>
       </Form.Group>
-      <Form.Group widths={1}>
+      <Form.Group widths={2}>
         <Form.Field>
-          <label>Anotações</label>
+          <label>Quadro Clinico</label>
           <Form.TextArea
             onChange={(e) => handleInputChangePaciente(e)}
             name="quadroClinico"
             rows={2}
-            placeholder="Anotações"
+            placeholder="Quadro Clininico"
             value={paciente.quadroClinico}
           />
+        </Form.Field>
+        <Form.Field>
+          <label>Quadro Clinico</label>
           <Form.TextArea
             onChange={(e) => handleInputChangePaciente(e)}
             name="observacoes"

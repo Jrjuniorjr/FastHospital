@@ -1,6 +1,7 @@
 import IEntidadeResponsavel from "../modelos/EntidadeResponsavel";
 
 export interface IPaciente {
+  id: string;
   nome: string;
   sexo: string;
   peso: string;

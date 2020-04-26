@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { IPaciente } from "../modelos/Paciente";
+import IVaga from "../modelos/Vaga";
 
 axios.defaults.baseURL = "http://localhost:5000/api";
 
@@ -10,21 +11,30 @@ const sleep = (ms: number) => (response: AxiosResponse) =>
     setTimeout(() => resolve(response), ms)
   );
 
-const requests = {
+const requestsResgateStore = {
+  get: (url: string, body: {}) =>
+    axios.get(url, body).then(sleep(1000)).then(responseBody),
+};
+
+const requestsHospitalStore = {
   get: (url: string) => axios.get(url).then(sleep(1000)).then(responseBody),
   post: (url: string, body: {}) =>
     axios.post(url, body).then(sleep(1000)).then(responseBody),
-  put: (url: string, body: {}) =>
-    axios.put(url, body).then(sleep(1000)).then(responseBody),
   del: (url: string) => axios.delete(url).then(sleep(1000)).then(responseBody),
 };
 
 const Paciente = {
-  create: (paciente: IPaciente) => requests.post("/novoPaciente", paciente),
-  list: (): Promise<IPaciente[]> => requests.get("/pacientes"),
-  details: (id: string) => requests.get(`/activities/${id}`),
+  create: (paciente: IPaciente) =>
+    requestsResgateStore.get("/novoPaciente", paciente),
+  list: (): Promise<IPaciente[]> => requestsHospitalStore.get("/pacientes"),
+  delete: (id: string) => requestsHospitalStore.del(`activities/${id}`),
+};
+
+const Vaga = {
+  create: (vaga: IVaga) => requestsHospitalStore.post("/novaVaga", vaga),
 };
 
 export default {
-  Paciente
+  Paciente,
+  Vaga,
 };

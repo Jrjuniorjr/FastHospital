@@ -7,8 +7,8 @@ const HomePage = () => {
     <Container style={{ marginTop: "7em" }}>
       <h1>Bem vindo ao FastHospital</h1>
       <h3>Selecione uma das opções</h3>
-      <Button as={Link} to={"/resgate"} positive content="Resgate" />
-      <Button as={Link} to={"/hospital"} positive content="Hospital" />
+      <Button as={Link} to={"/resgate"} positive content="RESGATE" />
+      <Button as={Link} to={"/hospital"} positive content="HOSPITAL" />
     </Container>
   );
 };

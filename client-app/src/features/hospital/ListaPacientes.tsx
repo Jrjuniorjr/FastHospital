@@ -1,12 +1,11 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Segment, Item, Button, Label } from "semantic-ui-react";
+import { Segment, Item, Button, Label, ItemExtra } from "semantic-ui-react";
 import HospitalStore from "../../app/stores/hospitalStore";
 import { observer } from "mobx-react-lite";
-import { Link } from "react-router-dom";
 const ListaPaciente = () => {
   const hospitalStore = useContext(HospitalStore);
 
-  const { pacientes, deletePaciente, target, submitting } = hospitalStore;
+  const { pacientes, recebeuPaciente, target, submitting } = hospitalStore;
 
   return (
     <Segment clearing>
@@ -15,33 +14,42 @@ const ListaPaciente = () => {
           <Item key={paciente.id}>
             <Item.Content>
               <Item.Header>{paciente.nome}</Item.Header>
-              <Item.Meta>Idade: {paciente.idade} </Item.Meta>
+              <Item.Meta>
+                Idade: {paciente.idade}, Sexo: {paciente.sexo}{" "}
+              </Item.Meta>
               <Item.Description>
-                Anotações:
-                <div>{paciente.quadroClinico.anotacoes}</div>
+                Quadro Clinico:
+                <div>{paciente.quadroClinico}</div>
+              </Item.Description>
+              <Item.Description>
+                Observações:
+                <div>{paciente.observacoes}</div>
               </Item.Description>
               <Label basic content={`Peso: ${paciente.peso}`} />
               <Label basic content={`Altura: ${paciente.altura}`} />
-              
               <Label
                 basic
                 content={`Tipo Sanguineo: ${paciente.tipoSanguineo}`}
               />
-              <Item.Extra>
-                <Button
-                  as={Link}
-                  to={`/hospital/${paciente.id}`}
-                  floated="right"
-                  content="View"
-                  color="blue"
+              <ItemExtra>
+                <Label
+                  basic
+                  content={`Nome da Entidade Responsavel: ${paciente.entidadeResponsavel.nome}`}
                 />
+                <Label
+                  basic
+                  content={`Nome do Profissional Responsavel: ${paciente.entidadeResponsavel.profissionalResponsavel}`}
+                />
+              </ItemExtra>
+
+              <Item.Extra>
                 <Button
                   name={paciente.id}
                   loading={target === paciente.id && submitting}
-                  onClick={(event) => deletePaciente(event, paciente.id)}
+                  onClick={(event) => recebeuPaciente(event, paciente.id)}
                   floated="right"
-                  content="Delete"
-                  color="red"
+                  content="RECEBEU O PACIENTE"
+                  positive
                 />
               </Item.Extra>
             </Item.Content>

@@ -1,27 +1,57 @@
-import { observable, action, computed, configure, runInAction } from "mobx";
+import { observable, action, configure, runInAction } from "mobx";
 import { createContext, SyntheticEvent, FormEvent } from "react";
 import agent from "../api/agent";
 import { IPaciente } from "../modelos/Paciente";
+import IVaga from "../modelos/Vaga";
 
 configure({ enforceActions: "always" });
 
 class HospitalStore {
+  @observable formularioPaciente = false;
   @observable submitting = false;
   @observable loadingInitial = false;
   @observable pacientes = new Map();
   @observable target = "";
   @observable paciente: IPaciente | undefined;
+  @observable vaga: IVaga = {
+    nomeDoHospital: "",
+    endereco: "",
+  };
 
-  @action loadPacientes = () => {
-    let quadroClinico = {
-      id: "",
-      febre: "",
-      dorDeCabeca: "",
-      calafrios: "",
-      cansaço: "",
-      dorDeGarganta: "",
-      tosse: "",
-      anotacoes: "muita dor de barriga, o carinha foi para uma festinha e cagou a noite toda",
+  @action limparVaga = () => {
+    this.vaga = {
+      nomeDoHospital: "",
+      endereco: "",
+    };
+  };
+
+  @action handleInputChangeVaga = (
+    event: FormEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = event.currentTarget;
+
+    this.vaga = { ...this.vaga, [name]: value };
+  };
+
+  @action enviarFormulario = async () => {
+    this.submitting = true;
+    try {
+      await agent.Vaga.create(this.vaga);
+      runInAction("enviando formulario", () => {
+        this.submitting = false;
+      });
+    } catch (error) {
+      runInAction("erro de envio de formulario", () => {
+        this.submitting = false;
+      });
+      console.log(error);
+    }
+  };
+
+   @action loadPacientes = () => {
+    let entidadeResponsavel = {
+      nome: "XYY",
+      profissionalResponsavel: "XXYY",
     };
     let paciente1 = {
       id: "1",
@@ -31,7 +61,9 @@ class HospitalStore {
       idade: "12",
       tipoSanguineo: "O+",
       altura: "1.53",
-      quadroClinico: quadroClinico,
+      quadroClinico: "ola",
+      observações: "td bem?",
+      entidadeResponsavel: entidadeResponsavel,
     };
     let paciente2 = {
       id: "2",
@@ -41,50 +73,33 @@ class HospitalStore {
       idade: "XX",
       tipoSanguineo: "B+",
       altura: "XX",
-      quadroClinico: quadroClinico,
+      quadroClinico: "ola",
+      observações: "td bem?",
+      entidadeResponsavel: entidadeResponsavel,
     };
     this.pacientes.set(paciente1.id, paciente1);
     this.pacientes.set(paciente2.id, paciente2);
-  };
+  }; 
 
-  /*
-  @action loadPacientes = async () => {
+  /* @action loadPacientes = async () => {
     this.loadingInitial = true;
     try {
-      const activities = await agent.Paciente.list();
-      runInAction("loading pacientes", () => {
+      const pacientes = await agent.Paciente.list();
+      runInAction("loading activities", () => {
+        pacientes.forEach((paciente) => {
+          this.pacientes.set(paciente.id, paciente);
+        });
         this.loadingInitial = false;
       });
     } catch (error) {
-      runInAction("load pacientes error", () => {
+      runInAction("load activities error", () => {
         this.loadingInitial = false;
       });
       console.log(error);
     }
   };
-  */
-
-  @action loadPaciente = async (id: string) => {
-    let paciente = this.pacientes.get(id);
-    if (paciente) {
-      this.paciente = paciente;
-    } else {
-      this.loadingInitial = true;
-      try {
-        paciente = await agent.Paciente.details(id);
-        runInAction("getting activity", () => {
-          this.paciente = paciente;
-          this.loadingInitial = false;
-        });
-      } catch (error) {
-        runInAction("get activity error", () => {
-          this.loadingInitial = false;
-        });
-        console.log(error);
-      }
-    }
-  };
-  @action deletePaciente = async (
+ */
+  @action recebeuPaciente = async (
     event: SyntheticEvent<HTMLButtonElement>,
     id: string
   ) => {
@@ -92,7 +107,7 @@ class HospitalStore {
     this.target = event.currentTarget.name;
     console.log(this.target);
     try {
-      //await agent.Activities.delete(id);
+      //await agent.Paciente.delete(id);
       runInAction("deleting activity", () => {
         this.pacientes.delete(id);
         this.submitting = false;
