@@ -92,7 +92,7 @@ const FormularioPaciente = () => {
             name="observacoes"
             rows={2}
             placeholder="Observações"
-            value={paciente.observações}
+            value={paciente.observacoes}
           />
         </Form.Field>
       </Form.Group>

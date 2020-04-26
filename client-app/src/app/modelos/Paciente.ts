@@ -1,4 +1,4 @@
-import IEntidadeResponsavel from "../modelos/EntidadeResponsavel";
+import { IEntidadeResponsavel } from "./EntidadeResponsavel";
 
 export interface IPaciente {
   id: string;
@@ -9,6 +9,6 @@ export interface IPaciente {
   tipoSanguineo: string;
   altura: string;
   quadroClinico: string;
-  observações: string;
+  observacoes: string;
   entidadeResponsavel: IEntidadeResponsavel;
 }

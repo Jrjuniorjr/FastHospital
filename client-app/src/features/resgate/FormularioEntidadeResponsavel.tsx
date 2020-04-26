@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 import ResgateStore from "../../app/stores/resgateStore";
 import { Form } from "semantic-ui-react";
+import { observer } from "mobx-react-lite";
 
-export const FormularioEntidadeResponsavel = () => {
+const FormularioEntidadeResponsavel = () => {
   const resgateStore = useContext(ResgateStore);
   const {
     entidadeResponsavel,
@@ -16,7 +17,6 @@ export const FormularioEntidadeResponsavel = () => {
           <Form.Input
             onChange={(e) => handleInputChangeEntidadeResponsavel(e)}
             name="nome"
-            icon="user"
             placeholder="Nome"
             value={entidadeResponsavel.nome}
           />
@@ -34,3 +34,5 @@ export const FormularioEntidadeResponsavel = () => {
     </Form>
   );
 };
+
+export default observer(FormularioEntidadeResponsavel);

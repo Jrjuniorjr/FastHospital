@@ -7,19 +7,20 @@ import HospitalStore from "../../app/stores/hospitalStore";
 import LoadingComponent from "../../app/layout/LoadingComponent";
 
 const Hospital = () => {
-  const hospitalStore = useContext(HospitalStore);
-  useEffect(() => {
+   const hospitalStore = useContext(HospitalStore);
+  /*useEffect(() => {
     hospitalStore.loadPacientes();
   }, [hospitalStore]);
-
+*/
   if (hospitalStore.loadingInitial) {
-    return <LoadingComponent content="Carregando pacientes..." />;
-  }
+    return <LoadingComponent content="Enviando vaga..." />;
+  } 
   return (
     <Grid>
-      <Grid.Column width={10}>
+      {/* <Grid.Column width={10}>
         <ListaPacientes />
       </Grid.Column>
+       */}
 
       <Grid.Column width={6}>
         <Button

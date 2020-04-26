@@ -3,7 +3,8 @@ import { Grid, Button, Label } from "semantic-ui-react";
 import ResgateStore from "../../app/stores/resgateStore";
 import { observer } from "mobx-react-lite";
 import FormularioPaciente from "./FormularioPaciente";
-import { FormularioEntidadeResponsavel } from "./FormularioEntidadeResponsavel";
+import FormularioEntidadeResponsavel from "./FormularioEntidadeResponsavel";
+import { Link } from "react-router-dom";
 
 const Resgate = () => {
   const resgateStore = useContext(ResgateStore);
@@ -45,9 +46,10 @@ const Resgate = () => {
           onClick={() => {
             enviarFormulario();
           }}
+          as={Link} to="/resgate/vagaEncontrada"
           positive
           content="ENVIAR FORMULARIO"
-          loading={submitting}
+          /* loading={submitting} */
         />
       </Grid.Row>
     </Grid>

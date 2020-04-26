@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite";
 const ListaPaciente = () => {
   const hospitalStore = useContext(HospitalStore);
 
-  const { pacientes, recebeuPaciente, target, submitting } = hospitalStore;
+  const { pacientes,/*  recebeuPaciente, */ target, submitting } = hospitalStore;
 
   return (
     <Segment clearing>
@@ -43,14 +43,14 @@ const ListaPaciente = () => {
               </ItemExtra>
 
               <Item.Extra>
-                <Button
+               {/* <Button
                   name={paciente.id}
                   loading={target === paciente.id && submitting}
                   onClick={(event) => recebeuPaciente(event, paciente.id)}
                   floated="right"
                   content="RECEBEU O PACIENTE"
                   positive
-                />
+               />*/}
               </Item.Extra>
             </Item.Content>
           </Item>

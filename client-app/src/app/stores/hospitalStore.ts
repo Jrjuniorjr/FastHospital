@@ -34,21 +34,21 @@ class HospitalStore {
   };
 
   @action enviarFormulario = async () => {
-    this.submitting = true;
+    this.loadingInitial = true;
     try {
       await agent.Vaga.create(this.vaga);
       runInAction("enviando formulario", () => {
-        this.submitting = false;
+        this.loadingInitial = false;
       });
     } catch (error) {
       runInAction("erro de envio de formulario", () => {
-        this.submitting = false;
+        this.loadingInitial = false;
       });
       console.log(error);
     }
   };
 
-   @action loadPacientes = () => {
+   /*@action loadPacientes = () => {
     let entidadeResponsavel = {
       nome: "XYY",
       profissionalResponsavel: "XXYY",
@@ -98,7 +98,7 @@ class HospitalStore {
       console.log(error);
     }
   };
- */
+ 
   @action recebeuPaciente = async (
     event: SyntheticEvent<HTMLButtonElement>,
     id: string
@@ -120,7 +120,7 @@ class HospitalStore {
       });
       console.log(error);
     }
-  };
+  };*/
 }
 
 export default createContext(new HospitalStore());

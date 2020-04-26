@@ -3,8 +3,9 @@ import { Grid, Button } from "semantic-ui-react";
 import FormularioVaga from "./FormularioVaga";
 import HospitalStore from "../../app/stores/hospitalStore";
 import { observer } from "mobx-react-lite";
+import { Link, RouteComponentProps } from "react-router-dom";
 
-const VagaPage = () => {
+const VagaPage: React.FC<RouteComponentProps> = ({ history }) => {
   const hospitalStore = useContext(HospitalStore);
   const { limparVaga, enviarFormulario, submitting } = hospitalStore;
 
@@ -25,12 +26,12 @@ const VagaPage = () => {
 
       <Grid.Row centered>
         <Button
-          onClick={() => {
-            enviarFormulario();
-          }}
+          as={Link}
+          to="/hospital"
+          onClick={enviarFormulario}
           positive
           content="ENVIAR FORMULARIO"
-          loading={submitting}
+          /*loading={submitting}*/
         />
       </Grid.Row>
     </Grid>
