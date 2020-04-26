@@ -8,47 +8,37 @@ import FormularioPaciente from "./FormularioPaciente";
 const Resgate = () => {
   const resgateStore = useContext(ResgateStore);
   const {
-    formularioQuadroClinico,
-    abrirFecharFormularioQuadroClinico,
-    formularioPaciente,
-    abrirFecharFormularioPaciente,
     limparPaciente,
-    limparQuadroClinico,
+    limparEntidadeResponsavel,
     enviarFormulario,
-    submitting
+    submitting,
   } = resgateStore;
 
   return (
     <Grid>
       <Grid.Row>
-        <Button
-          onClick={abrirFecharFormularioQuadroClinico}
-          positive
-          content="Quadro Clínico"
-        />
-        <Button
-          onClick={limparQuadroClinico}
-          color="grey"
-          content="Limpar dados do quadro clinico"
-        />
+        <Grid.Column width={8}>
+          <Button
+            onClick={limparPaciente}
+            color="grey"
+            content="Limpar dados do paciente"
+          />
+          <br />
+          <FormularioPaciente />
+        </Grid.Column>
+
+        <Grid.Column width={8}>
+          <Button
+            onClick={limparEntidadeResponsavel}
+            color="grey"
+            content="Limpar dados do quadro clinico"
+          />
+          <br />
+          <FormularioQuadroClinico />
+        </Grid.Column>
       </Grid.Row>
-      <Grid.Row>
-        {formularioQuadroClinico && <FormularioQuadroClinico />}
-      </Grid.Row>
-      <Grid.Row>
-        <Button
-          onClick={abrirFecharFormularioPaciente}
-          positive
-          content="Paciente"
-        />
-        <Button
-          onClick={limparPaciente}
-          color="grey"
-          content="Limpar dados do paciente"
-        />
-      </Grid.Row>
-      <Grid.Row>{formularioPaciente && <FormularioPaciente />}</Grid.Row>
-      <Grid.Row>
+
+      <Grid.Row centered>
         <Button
           onClick={() => {
             enviarFormulario();

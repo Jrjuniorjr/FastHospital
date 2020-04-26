@@ -5,7 +5,7 @@ import ResgateStore from "../../app/stores/resgateStore";
 
 const FormularioPaciente = () => {
   const resgateStore = useContext(ResgateStore);
-  const { paciente,handleInputChangePaciente } = resgateStore;
+  const { paciente, handleInputChangePaciente } = resgateStore;
 
   return (
     <Form>
@@ -54,7 +54,7 @@ const FormularioPaciente = () => {
         </Form.Field>
       </Form.Group>
 
-      <Form.Group widths={1}>
+      <Form.Group widths={2}>
         <Form.Field>
           <label>Tipo Sanguineo</label>
           <Form.Input
@@ -71,6 +71,25 @@ const FormularioPaciente = () => {
             name="altura"
             value={paciente.altura}
             placeholder="Altura"
+          />
+        </Form.Field>
+      </Form.Group>
+      <Form.Group widths={1}>
+        <Form.Field>
+          <label>Anotações</label>
+          <Form.TextArea
+            onChange={(e) => handleInputChangePaciente(e)}
+            name="quadroClinico"
+            rows={2}
+            placeholder="Anotações"
+            value={paciente.quadroClinico}
+          />
+          <Form.TextArea
+            onChange={(e) => handleInputChangePaciente(e)}
+            name="observacoes"
+            rows={2}
+            placeholder="Observações"
+            value={paciente.observações}
           />
         </Form.Field>
       </Form.Group>

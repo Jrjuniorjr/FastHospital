@@ -2,82 +2,57 @@ import { observable, action, computed, configure, runInAction } from "mobx";
 import { createContext, SyntheticEvent, FormEvent } from "react";
 import agent from "../api/agent";
 import { IPaciente } from "../modelos/Paciente";
-import { IQuadroClinico } from "../modelos/QuadroClinico";
 import { v4 as uuid } from "uuid";
+import IEntidadeResponsavel from "../modelos/EntidadeResponsavel";
 
 configure({ enforceActions: "always" });
 
 class ResgateStore {
-  @observable formularioQuadroClinico = false;
   @observable formularioPaciente = false;
   @observable submitting = false;
   @observable loadInitial = false;
 
-  @observable quadroClinico: IQuadroClinico = {
-    id: "",
-    febre: "",
-    dorDeCabeca: "",
-    calafrios: "",
-    cansaço: "",
-    dorDeGarganta: "",
-    tosse: "",
-    anotacoes: "",
+  @observable entidadeResponsavel: IEntidadeResponsavel = {
+    nome: "",
+    profissionalResponsavel: "",
   };
   @observable paciente: IPaciente = {
-    id: "",
     nome: "",
     sexo: "",
     peso: "",
     idade: "",
     tipoSanguineo: "",
     altura: "",
-    quadroClinico: this.quadroClinico,
+    quadroClinico: "",
+    observações: "",
+    entidadeResponsavel: this.entidadeResponsavel,
   };
 
-  @action abrirFecharFormularioQuadroClinico = () => {
-    this.formularioQuadroClinico = !this.formularioQuadroClinico;
-  };
-
-  @action abrirFecharFormularioPaciente = () => {
-    this.formularioPaciente = !this.formularioPaciente;
-  };
-
-  limparQuadroClinico = () => {
-    this.quadroClinico = {
-      id: "",
-      febre: "",
-      dorDeCabeca: "",
-      calafrios: "",
-      cansaço: "",
-      dorDeGarganta: "",
-      tosse: "",
-      anotacoes: "",
+  @action limparEntidadeResponsavel = () => {
+    this.entidadeResponsavel = {
+      nome: "",
+      profissionalResponsavel: "",
     };
   };
 
-  limparPaciente = () => { //problema 
-    this.limparQuadroClinico();
+  @action limparPaciente = () => {
+    //problema
+    this.limparEntidadeResponsavel();
     runInAction("limpando", () => {
       this.paciente = {
-        id: "",
         nome: "",
         sexo: "",
         peso: "",
         idade: "",
         tipoSanguineo: "",
         altura: "",
-        quadroClinico: this.quadroClinico,
+        quadroClinico: "",
+        observações: "",
+        entidadeResponsavel: this.entidadeResponsavel,
       };
     });
-  }; 
+  };
 
-  setIdPaciente = () => {
-    this.paciente = { ...this.paciente, ["id"]: uuid() };
-  };
-  
-  setIdQuadroClinico = () => {
-    this.quadroClinico = { ...this.quadroClinico, ["id"]: uuid() };
-  };
   @action handleInputChangePaciente = (
     event: FormEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -91,13 +66,12 @@ class ResgateStore {
   ) => {
     const { name, value } = event.currentTarget;
 
-    this.quadroClinico = { ...this.quadroClinico, [name]: value };
+    this.entidadeResponsavel = { ...this.entidadeResponsavel, [name]: value };
   };
 
   @action enviarFormulario = async () => {
     this.submitting = true;
-    this.setIdPaciente();
-    this.setIdQuadroClinico();
+    this.paciente.entidadeResponsavel = this.entidadeResponsavel;
     try {
       await agent.Paciente.create(this.paciente);
       runInAction("enviando formulario", () => {
