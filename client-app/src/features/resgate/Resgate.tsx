@@ -26,6 +26,7 @@ const Resgate = () => {
             content="LIMPAR DADOS DO PACIENTE"
           />
           <br />
+          <br />
           <FormularioPaciente />
         </Grid.Column>
 
@@ -37,6 +38,7 @@ const Resgate = () => {
             content="LIMPAR DADOS DA ENTIDADE RESPONSAVEL"
           />
           <br />
+          <br />
           <FormularioEntidadeResponsavel />
         </Grid.Column>
       </Grid.Row>
@@ -46,7 +48,8 @@ const Resgate = () => {
           onClick={() => {
             enviarFormulario();
           }}
-          as={Link} to="/resgate/vagaEncontrada"
+          as={Link}
+          to="/resgate/vagaEncontrada"
           positive
           content="ENVIAR FORMULARIO"
           /* loading={submitting} */

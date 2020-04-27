@@ -5,6 +5,7 @@ import ListaPacientes from "./ListaPacientes";
 import { Link } from "react-router-dom";
 import HospitalStore from "../../app/stores/hospitalStore";
 import LoadingComponent from "../../app/layout/LoadingComponent";
+import ErrorMessage from "../error/ErrorMessage";
 
 const Hospital = () => {
    const hospitalStore = useContext(HospitalStore);
@@ -14,7 +15,12 @@ const Hospital = () => {
 */
   if (hospitalStore.loadingInitial) {
     return <LoadingComponent content="Enviando vaga..." />;
-  } 
+  }
+
+  
+  if (hospitalStore.erro) {
+    return <ErrorMessage />;
+  }
   return (
     <Grid>
       {/* <Grid.Column width={10}>

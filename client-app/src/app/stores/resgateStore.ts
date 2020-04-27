@@ -13,7 +13,10 @@ configure({ enforceActions: "always" });
 class ResgateStore {
   @observable formularioPaciente = false;
   @observable submitting = false;
+  @observable erroMessage = "";
+  @observable link = "";
   @observable loadingInitial = false;
+  @observable erro = false;
   @observable vaga: IVaga = {
     nomeDoHospital: "",
     endereco: ""
@@ -100,11 +103,20 @@ class ResgateStore {
     } catch (error) {
       runInAction("erro de envio de formulario", () => {
         this.loadingInitial = false;
+        this.erro = true;
+        this.link = "/resgate";
+        this.erroMessage = error.message;
         /* this.submitting = false; */
       });
       console.log(error);
     }
   };
+
+  @action limparError=()=>{
+    this.erro = false;
+    this.erroMessage = "";
+    this.link = "";
+  }
 }
 
 export default createContext(new ResgateStore());

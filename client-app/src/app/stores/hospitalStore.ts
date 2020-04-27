@@ -3,6 +3,7 @@ import { createContext, SyntheticEvent, FormEvent } from "react";
 import agent from "../api/agent";
 import { IPaciente } from "../modelos/Paciente";
 import IVaga from "../modelos/Vaga";
+import ErrorMessage from "../../features/error/ErrorMessage";
 
 configure({ enforceActions: "always" });
 
@@ -12,7 +13,11 @@ class HospitalStore {
   @observable loadingInitial = false;
   @observable pacientes = new Map();
   @observable target = "";
+  @observable link = "";
   @observable paciente: IPaciente | undefined;
+  @observable erroMessage = "";
+  @observable erro = false;
+
   @observable vaga: IVaga = {
     nomeDoHospital: "",
     endereco: "",
@@ -43,12 +48,20 @@ class HospitalStore {
     } catch (error) {
       runInAction("erro de envio de formulario", () => {
         this.loadingInitial = false;
+        this.erro = true;
+        this.link = "/hospital/novaVaga";
+        this.erroMessage = error.message;
       });
       console.log(error);
     }
   };
+  @action limparError = () => {
+    this.erro = false;
+    this.erroMessage = "";
+    this.link = "";
+  };
 
-   /*@action loadPacientes = () => {
+  /*@action loadPacientes = () => {
     let entidadeResponsavel = {
       nome: "XYY",
       profissionalResponsavel: "XXYY",

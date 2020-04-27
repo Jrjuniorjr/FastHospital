@@ -13,7 +13,7 @@ const FormularioEntidadeResponsavel = () => {
     <Form>
       <Form.Group widths={2}>
         <Form.Field>
-          <label>Nome</label>
+          <label>Nome da Entidade Responsavel</label>
           <Form.Input
             onChange={(e) => handleInputChangeEntidadeResponsavel(e)}
             name="nome"
@@ -22,7 +22,7 @@ const FormularioEntidadeResponsavel = () => {
           />
         </Form.Field>
         <Form.Field>
-          <label>Sexo</label>
+          <label>Nome do Profissional Responsavel</label>
           <Form.Input
             onChange={(e) => handleInputChangeEntidadeResponsavel(e)}
             name="profissionalResponsavel"
