@@ -1,5 +1,3 @@
-import { IEntidadeResponsavel } from "./EntidadeResponsavel";
-
 export interface IPaciente {
   id: string;
   nome: string;
@@ -10,5 +8,6 @@ export interface IPaciente {
   altura: string;
   quadroClinico: string;
   observacoes: string;
-  entidadeResponsavel: IEntidadeResponsavel;
+  nomeEntidadeResponsavel: string;
+  profissionalResponsavel: string;
 }

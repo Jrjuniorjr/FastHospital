@@ -5,29 +5,26 @@ import { observer } from "mobx-react-lite";
 
 const FormularioEntidadeResponsavel = () => {
   const resgateStore = useContext(ResgateStore);
-  const {
-    entidadeResponsavel,
-    handleInputChangeEntidadeResponsavel,
-  } = resgateStore;
+  const { paciente, handleInputChangePaciente } = resgateStore;
   return (
     <Form>
       <Form.Group widths={2}>
         <Form.Field>
           <label>Nome da Entidade Responsavel</label>
           <Form.Input
-            onChange={(e) => handleInputChangeEntidadeResponsavel(e)}
-            name="nome"
-            placeholder="Nome"
-            value={entidadeResponsavel.nome}
+            onChange={(e) => handleInputChangePaciente(e)}
+            name="nomeEntidadeResponsavel"
+            placeholder="Nome da Entidade Responsavel"
+            value={paciente.nomeEntidadeResponsavel}
           />
         </Form.Field>
         <Form.Field>
           <label>Nome do Profissional Responsavel</label>
           <Form.Input
-            onChange={(e) => handleInputChangeEntidadeResponsavel(e)}
+            onChange={(e) => handleInputChangePaciente(e)}
             name="profissionalResponsavel"
             placeholder="Profissional Responsavel"
-            value={entidadeResponsavel.profissionalResponsavel}
+            value={paciente.profissionalResponsavel}
           />
         </Form.Field>
       </Form.Group>

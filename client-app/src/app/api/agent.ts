@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from "axios";
 import { IPaciente } from "../modelos/Paciente";
 import IVaga from "../modelos/Vaga";
 
-axios.defaults.baseURL = "http://localhost:5000/api";
+axios.defaults.baseURL = "http://localhost:8080/fast-hospital";
 
 const responseBody = (responseBody: AxiosResponse) => responseBody.data;
 
@@ -25,13 +25,13 @@ const requestsHospitalStore = {
 
 const Paciente = {
   create: (paciente: IPaciente) =>
-    requestsResgateStore.get("/novoPaciente", paciente),
+    requestsResgateStore.get("/encontrar-vaga", paciente),
   list: (): Promise<IPaciente[]> => requestsHospitalStore.get("/pacientes"),
   delete: (id: string) => requestsHospitalStore.del(`activities/${id}`),
 };
 
 const Vaga = {
-  create: (vaga: IVaga) => requestsHospitalStore.post("/novaVaga", vaga),
+  create: (vaga: IVaga) => requestsHospitalStore.post("/cadastrar-vaga", vaga),
 };
 
 export default {

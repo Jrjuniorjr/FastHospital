@@ -21,12 +21,16 @@ class HospitalStore {
   @observable vaga: IVaga = {
     nomeDoHospital: "",
     endereco: "",
+    profissionalResponsavel: "",
+    emailDoProfissional: "",
   };
 
   @action limparVaga = () => {
     this.vaga = {
       nomeDoHospital: "",
       endereco: "",
+      profissionalResponsavel: "",
+      emailDoProfissional: "",
     };
   };
 

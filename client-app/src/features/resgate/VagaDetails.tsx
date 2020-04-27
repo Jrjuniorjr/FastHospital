@@ -29,6 +29,12 @@ const VagaDetails: React.FC<RouteComponentProps> = ({ history }) => {
         <Card.Header>
           <span>Endereço: {vaga!.endereco}</span>
         </Card.Header>
+        <Card.Header>
+          <span>Profissional Responsavel: {vaga!.profissionalResponsavel}</span>
+        </Card.Header>
+        <Card.Header>
+          <span>Email do Profissional Responsavel: {vaga!.emailDoProfissional}</span>
+        </Card.Header>
       </Card.Content>
       <Card.Content extra>
         <Button

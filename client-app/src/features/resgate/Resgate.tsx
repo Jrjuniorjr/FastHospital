@@ -10,7 +10,6 @@ const Resgate = () => {
   const resgateStore = useContext(ResgateStore);
   const {
     limparPaciente,
-    limparEntidadeResponsavel,
     enviarFormulario,
     submitting,
   } = resgateStore;
@@ -23,7 +22,7 @@ const Resgate = () => {
           <Button
             onClick={limparPaciente}
             color="grey"
-            content="LIMPAR DADOS DO PACIENTE"
+            content="LIMPAR DADOS"
           />
           <br />
           <br />
@@ -32,11 +31,6 @@ const Resgate = () => {
 
         <Grid.Column width={8}>
           <h2>Entidade Responsavel</h2>
-          <Button
-            onClick={limparEntidadeResponsavel}
-            color="grey"
-            content="LIMPAR DADOS DA ENTIDADE RESPONSAVEL"
-          />
           <br />
           <br />
           <FormularioEntidadeResponsavel />
