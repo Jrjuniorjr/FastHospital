@@ -4,17 +4,17 @@ import { observer } from "mobx-react-lite";
 import ResgateStore from "../../app/stores/resgateStore";
 import { RouteComponentProps } from "react-router-dom";
 import LoadingComponent from "../../app/layout/LoadingComponent";
-import ErrorMessage from "../error/ErrorMessage";
+import MensagemSucessoErro from "../error/MensagemSucessoErro";
 
 const VagaDetails: React.FC<RouteComponentProps> = ({ history }) => {
   const resgateStore = useContext(ResgateStore);
-  const { vaga, limparVaga, erro } = resgateStore;
+  const { vaga, limparVaga, erroFlag: erro } = resgateStore;
 
   if (resgateStore.loadingInitial) {
     return <LoadingComponent content="Carregando vaga..." />;
   }
-  if (erro) {
-    return <ErrorMessage />;
+   if (erro) {
+    return <MensagemSucessoErro />;
   }
 
   return (

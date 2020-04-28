@@ -5,43 +5,34 @@ import HospitalStore from "../../app/stores/hospitalStore";
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 
-const ErrorMessage = () => {
+const MensagemSucessoErro = () => {
   const resgateStore = useContext(ResgateStore);
-  const {
-    limparError: limparErrorResgate,
-    erroMessage: messageErrorResgate,
-    link: linkResgate,
-    erro: erroResgate,
-  } = resgateStore;
 
   const hospitalStore = useContext(HospitalStore);
-  const {
-    limparError: limparErrorHospital,
-    erroMessage: messageErrorHospital,
-    link: linkHospital,
-    erro: erroHospital,
-  } = hospitalStore;
-  if (erroHospital) {
+  
+  if (hospitalStore.erroFlag || hospitalStore.sucessFlag) {
     return (
       <Message negative>
-        <Message.Header>{messageErrorHospital}</Message.Header>
+        <Message.Header>{hospitalStore.mensagem}</Message.Header>
+        <br/>
         <Button
-          onClick={limparErrorHospital}
+          onClick={hospitalStore.limparButaoOkMensagem}
           as={Link}
-          to={linkHospital}
+          to={hospitalStore.link}
           content="Ok"
         ></Button>
       </Message>
     );
   }
-  if (erroResgate) {
+  if (resgateStore.erroFlag) {
     return (
       <Message negative>
-        <Message.Header>{messageErrorResgate}</Message.Header>
+        <Message.Header>{resgateStore.mensagem}</Message.Header>
+        <br/>
         <Button
-          onClick={limparErrorResgate}
+          onClick={resgateStore.limparButaoOkMensagem}
           as={Link}
-          to={linkResgate}
+          to={resgateStore.link}
           content="Ok"
         ></Button>
       </Message>
@@ -50,4 +41,4 @@ const ErrorMessage = () => {
   return (<div></div>)
 };
 
-export default observer(ErrorMessage);
+export default observer(MensagemSucessoErro);

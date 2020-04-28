@@ -13,9 +13,9 @@ const FormularioEntidadeResponsavel = () => {
           <label>Nome da Entidade Responsavel</label>
           <Form.Input
             onChange={(e) => handleInputChangePaciente(e)}
-            name="nomeEntidadeResponsavel"
+            name="nomeDaEntidadeResponsavel"
             placeholder="Nome da Entidade Responsavel"
-            value={paciente.nomeEntidadeResponsavel}
+            value={paciente.nomeDaEntidadeResponsavel}
           />
         </Form.Field>
         <Form.Field>

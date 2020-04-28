@@ -5,7 +5,7 @@ import ListaPacientes from "./ListaPacientes";
 import { Link } from "react-router-dom";
 import HospitalStore from "../../app/stores/hospitalStore";
 import LoadingComponent from "../../app/layout/LoadingComponent";
-import ErrorMessage from "../error/ErrorMessage";
+import MensagemSucessoErro from "../error/MensagemSucessoErro";
 
 const Hospital = () => {
    const hospitalStore = useContext(HospitalStore);
@@ -18,8 +18,8 @@ const Hospital = () => {
   }
 
   
-  if (hospitalStore.erro) {
-    return <ErrorMessage />;
+  if (hospitalStore.erroFlag || hospitalStore.sucessFlag) {
+    return <MensagemSucessoErro />;
   }
   return (
     <Grid>

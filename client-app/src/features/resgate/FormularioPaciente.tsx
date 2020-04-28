@@ -15,7 +15,6 @@ const FormularioPaciente = () => {
           <Form.Input
             onChange={(e) => handleInputChangePaciente(e)}
             name="nome"
-            icon="user"
             placeholder="Nome"
             value={paciente.nome}
           />
@@ -37,7 +36,6 @@ const FormularioPaciente = () => {
           <Form.Input
             onChange={(e) => handleInputChangePaciente(e)}
             name="peso"
-            icon="weight"
             placeholder="Peso"
             value={paciente.peso}
           />
@@ -86,7 +84,7 @@ const FormularioPaciente = () => {
           />
         </Form.Field>
         <Form.Field>
-          <label>Quadro Clinico</label>
+          <label>Observações</label>
           <Form.TextArea
             onChange={(e) => handleInputChangePaciente(e)}
             name="observacoes"

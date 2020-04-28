@@ -1,5 +1,4 @@
 export interface IPaciente {
-  id: string;
   nome: string;
   sexo: string;
   peso: string;
@@ -8,6 +7,6 @@ export interface IPaciente {
   altura: string;
   quadroClinico: string;
   observacoes: string;
-  nomeEntidadeResponsavel: string;
+  nomeDaEntidadeResponsavel: string;
   profissionalResponsavel: string;
 }

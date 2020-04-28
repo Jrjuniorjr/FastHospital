@@ -10,7 +10,7 @@ const FormularioVaga = () => {
     <Form>
       <Form.Group widths={2}>
         <Form.Field>
-          <label>Nome</label>
+          <label>Nome do Hospital</label>
           <Form.Input
             onChange={(e) => handleInputChangeVaga(e)}
             name="nomeDoHospital"
@@ -19,11 +19,11 @@ const FormularioVaga = () => {
           />
         </Form.Field>
         <Form.Field>
-          <label>Endereço</label>
+          <label>Endereço do Hospital</label>
           <Form.Input
             onChange={(e) => handleInputChangeVaga(e)}
             name="endereco"
-            placeholder="Endereço"
+            placeholder="Endereço do Hospital"
             value={vaga.endereco}
           />
         </Form.Field>

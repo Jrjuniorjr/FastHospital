@@ -3,7 +3,7 @@ import { createContext, SyntheticEvent, FormEvent } from "react";
 import agent from "../api/agent";
 import { IPaciente } from "../modelos/Paciente";
 import IVaga from "../modelos/Vaga";
-import ErrorMessage from "../../features/error/ErrorMessage";
+import MensagemSucessoErro from "../../features/error/MensagemSucessoErro";
 
 configure({ enforceActions: "always" });
 
@@ -15,12 +15,15 @@ class HospitalStore {
   @observable target = "";
   @observable link = "";
   @observable paciente: IPaciente | undefined;
-  @observable erroMessage = "";
-  @observable erro = false;
+  @observable mensagem = "";
+  @observable erroFlag = false;
+  @observable sucessFlag = false;
+  
 
   @observable vaga: IVaga = {
     nomeDoHospital: "",
     endereco: "",
+    codigo:"",
     profissionalResponsavel: "",
     emailDoProfissional: "",
   };
@@ -29,6 +32,7 @@ class HospitalStore {
     this.vaga = {
       nomeDoHospital: "",
       endereco: "",
+      codigo:"",
       profissionalResponsavel: "",
       emailDoProfissional: "",
     };
@@ -45,24 +49,27 @@ class HospitalStore {
   @action enviarFormulario = async () => {
     this.loadingInitial = true;
     try {
-      await agent.Vaga.create(this.vaga);
+      let messageLocal= await agent.Vaga.create(this.vaga);
       runInAction("enviando formulario", () => {
         this.loadingInitial = false;
+        this.sucessFlag = true;
+        this.mensagem = messageLocal;
       });
     } catch (error) {
       runInAction("erro de envio de formulario", () => {
         this.loadingInitial = false;
-        this.erro = true;
+        this.erroFlag = true;
         this.link = "/hospital/novaVaga";
-        this.erroMessage = error.message;
+        this.mensagem = error.message;
       });
       console.log(error);
     }
   };
-  @action limparError = () => {
-    this.erro = false;
-    this.erroMessage = "";
+  @action limparButaoOkMensagem = () => {
+    this.erroFlag = false;
+    this.mensagem = "";
     this.link = "";
+    this.sucessFlag = false;
   };
 
   /*@action loadPacientes = () => {
