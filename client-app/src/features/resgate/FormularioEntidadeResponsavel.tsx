@@ -23,7 +23,7 @@ const FormularioEntidadeResponsavel = () => {
           <Form.Input
             onChange={(e) => handleInputChangePaciente(e)}
             name="profissionalResponsavel"
-            placeholder="Profissional Responsavel"
+            placeholder="Nome do Profissional Responsavel"
             value={paciente.profissionalResponsavel}
           />
         </Form.Field>
